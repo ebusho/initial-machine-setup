@@ -1,0 +1,145 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+
+  handlers:
+    - name: reload_powerline
+      command: powerline-daemon --replace
+  
+  tasks:
+    - name: Update system.
+      become: true
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Visual Studio Code GPG key.
+      become: true
+      rpm_key:
+        key: https://packages.microsoft.com/keys/microsoft.asc
+        state: present
+
+    - name: VirtualBox GPG key.
+      become: true
+      rpm_key:
+        key: https://www.virtualbox.org/download/oracle_vbox.asc
+        state: present
+
+    - name: Google Chrome GPG key.
+      become: true
+      rpm_key:
+        key: https://dl.google.com/linux/linux_signing_key.pub
+        state: present
+
+    - name: Slack GPG key.
+      become: true
+      rpm_key:
+        key: https://packagecloud.io/gpg.key
+        state: present
+
+    - name: AnyDesk GPG key.
+      become: true
+      rpm_key:
+        key: https://keys.anydesk.com/repos/RPM-GPG-KEY
+        state: present
+        
+    - name: Visual Studio Code repo.
+      become: true
+      copy:
+        src: repos/vscode.repo
+        dest: /etc/yum.repos.d/vscode.repo
+
+    - name: VirtualBox repo.
+      become: true
+      copy:
+        src: repos/virtualbox.repo
+        dest: /etc/yum.repos.d/virtualbox.repo
+
+    - name: Google Chrome repo.
+      become: true
+      copy:
+        src: repos/google-chrome.repo
+        dest: /etc/yum.repos.d/google-chrome.repo
+
+    - name: Slack repo.
+      become: true
+      copy:
+        src: repos/slack.repo
+        dest: /etc/yum.repos.d/slack.repo
+
+    - name: AnyDesk repo.
+      become: true
+      copy:
+        src: repos/anydesk.repo
+        dest: /etc/yum.repos.d/anydesk.repo
+
+    - name: Install packages
+      become: true
+      dnf:
+        name:
+          - '@Development tools'
+          - kernel-devel
+          - google-chrome-stable
+          - slack
+          - code
+          # TODO: uncomment when it comes available in fedora 32
+          # - VirtualBox-6.1
+          # - virtualbox-guest-additions
+          - vagrant
+          - docker
+          - filezilla
+          - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
+          - powerline
+          - powerline-fonts
+          - vim-powerline
+          - openvpn
+          - anydesk
+          - snapd
+          - remmina
+          - wine
+          - neofetch
+          - cloc
+        state: latest
+      notify:
+        - reload_powerline
+
+    #TODO: Research: Enable classic snap support
+    # sudo ln -s /var/lib/snapd/snap /snap
+    # Some details here: https://snapcraft.io/install/libreoffice/fedora
+    - name: Install snap packages
+      become: true
+      snap:
+        name:
+          - libreoffice
+        state: present
+
+    - name: Install NVM.
+      import_role:
+        name: morgangraphics.ansible_role_nvm
+        
+        
+    #TODO: Install Typora
+    # https://typora.io/#linux
+    # Download binary file:
+    # https://typora.io/linux/Typora-linux-x64.tar.gz
+    # Extract to /opt
+    # Add directory to $PATH
+
+
+    # - name: Install NPM packages.
+    #   npm:
+    # TODO: packages
+
+    #TODO: VS Code plugins
+    #TODO: Google chrome plugins
+
+    #TODO: Add current user to 'vboxusers' group and docker group to run docker without sudo
+
+    #TODO: DOT FILES AND CONFIG
+    # https://eshlox.net/2017/08/10/how-to-install-powerline-for-bash-on-fedora-with-git-branch-support
+
+    # TODO: Add RPMFusion repo
+    # https://rpmfusion.org/
+    
+
+    #TODO: Set default apps (browser, pdf, docs, spreadsheets)
