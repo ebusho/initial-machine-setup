@@ -1,2 +1,3 @@
 ---
-- name: morgangraphics.ansible_role_nvm
+collections:
+  - name: morgangraphics.ansible_role_nvm
