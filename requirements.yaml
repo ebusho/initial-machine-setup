@@ -1,3 +1,4 @@
 ---
 collections:
-  - name: morgangraphics.ansible_role_nvm
+- name: morgangraphics.ansible_role_nvm
+  version: 1.4.3
