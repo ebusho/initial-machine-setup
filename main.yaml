@@ -55,11 +55,11 @@
         src: repos/virtualbox.repo
         dest: /etc/yum.repos.d/virtualbox.repo
 
-    - name: Google Chrome repo.
+    - name: Brave Browser repo.
       become: true
       copy:
-        src: repos/google-chrome.repo
-        dest: /etc/yum.repos.d/google-chrome.repo
+        src: repos/brave-browser.repo
+        dest: /etc/yum.repos.d/brave-browser.repo
 
     - name: Slack repo.
       become: true
