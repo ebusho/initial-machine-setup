@@ -22,7 +22,7 @@
     - name: VirtualBox GPG key.
       become: true
       rpm_key:
-        key: https://www.virtualbox.org/download/oracle_vbox.asc
+        key: https://www.virtualbox.org/download/oracle_vbox_2016.asc
         state: present
 
     - name: Google Chrome GPG key.
@@ -77,7 +77,7 @@
       become: true
       dnf:
         name:
-          - '@Development tools'
+          - '@development-tools'
           - kernel-devel
           - google-chrome-stable
           - slack
@@ -88,7 +88,7 @@
           - vagrant
           - docker
           - filezilla
-          - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
+          # - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
           - powerline
           - powerline-fonts
           - vim-powerline
@@ -97,7 +97,7 @@
           - snapd
           - remmina
           - wine
-          - neofetch
+          - fastfetch
           - cloc
         state: latest
       notify:
