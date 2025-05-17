@@ -1,4 +1,4 @@
 ---
 roles:
 - name: morgangraphics.ansible_role_nvm
-  version: 1.4.3
+  version: v2.0.0
