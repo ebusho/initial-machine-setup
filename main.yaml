@@ -1,6 +1,5 @@
 ---
-- hosts: 127.0.0.1
-  connection: local
+- hosts: "{{ ansible_limit | default('localhost') }}"
 
   handlers:
     - name: reload_powerline
