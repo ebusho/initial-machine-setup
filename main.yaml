@@ -25,10 +25,10 @@
         key: https://www.virtualbox.org/download/oracle_vbox_2016.asc
         state: present
 
-    - name: Google Chrome GPG key.
+    - name: Brave Browser GPG key.
       become: true
       rpm_key:
-        key: https://dl.google.com/linux/linux_signing_key.pub
+        key: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
         state: present
 
     - name: Slack GPG key.
@@ -79,7 +79,7 @@
         name:
           - '@development-tools'
           - kernel-devel
-          - google-chrome-stable
+          - brave-browser
           - slack
           - code
           # TODO: uncomment when it comes available in fedora 32
