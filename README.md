@@ -1,26 +1,37 @@
-## Fedora Workstation 32 initial machine setup
+# Fedora initial machine setup
 
+Tested with Fedora 41.
 
+## Prerequisites
 
-### Steps
+Make sure `git` and `ansible` are installed:
 
-- Install Ansible.
+```shell
+sudo dnf install git python3-pip
 
-- Clone this repository to your local drive.
+python3 -m pip install --user ansible
+```
 
-- Run:
+## Steps
 
-  ```bash
-  ansible-galaxy install -r requirements.yaml
-  ```
-  inside this directory to install required Ansible roles.
+1. Clone this repository:
 
-- Run:
+```shell
+git clone https://github.com/ebusho/initial-machine-setup.git
+```
 
-  ```bash
-  ansible-playbook main.yaml -i inventory -K
-  ```
-  inside this directory.
-  
-- Enter your account password when prompted.
+2. Install dependent roles:
 
+```shell
+ansible-galaxy install -r requirements.yaml
+```
+
+3. Run Ansible playbook:
+
+```shell
+ansible-playbook main.yaml -i hosts -K
+```
+
+## Author
+
+This project is created by Alis Adrović (inspired by [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)).
